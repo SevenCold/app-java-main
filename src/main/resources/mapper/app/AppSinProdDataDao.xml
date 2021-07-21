@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppSinProdDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppSinProdDataEntity" id="appSinProdDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="plcBlendLevel" column="PLC_BLEND_LEVEL"/>
+        <result property="plcBlendTe" column="PLC_BLEND_TE"/>
+        <result property="plcStickPv" column="PLC_STICK_PV"/>
+        <result property="plcSinSpeedPvHz" column="PLC_SIN_SPEED_PV_HZ"/>
+        <result property="plcSinSpeedPv" column="PLC_SIN_SPEED_PV"/>
+        <result property="plcBedMateralW" column="PLC_BED_MATERAL_W"/>
+        <result property="plcThickPv" column="PLC_THICK_PV"/>
+        <result property="plcIgGasPv" column="PLC_IG_GAS_PV"/>
+        <result property="plcIgAirPv" column="PLC_IG_AIR_PV"/>
+        <result property="plcIg01Te" column="PLC_IG_01_TE"/>
+        <result property="plcIg02Te" column="PLC_IG_02_TE"/>
+        <result property="plcXTrpOut" column="PLC_X_TRP_OUT"/>
+        <result property="plcTrpBoxNumOut" column="PLC_TRP_BOX_NUM_OUT"/>
+        <result property="plcTrpTeOut" column="PLC_TRP_TE_OUT"/>
+        <result property="plcAimBrpOut" column="PLC_AIM_BRP_OUT"/>
+        <result property="plcXBrpOut" column="PLC_X_BRP_OUT"/>
+        <result property="plcBrpBoxNumOut" column="PLC_BRP_BOX_NUM_OUT"/>
+        <result property="plcBrpTeOut" column="PLC_BRP_TE_OUT"/>
+        <result property="plcAimBtpOut" column="PLC_AIM_BTP_OUT"/>
+        <result property="plcXBtpOut" column="PLC_X_BTP_OUT"/>
+        <result property="plcBtpBoxNumOut" column="PLC_BTP_BOX_NUM_OUT"/>
+        <result property="plcBtpTeOut" column="PLC_BTP_TE_OUT"/>
+    </resultMap>
+
+
+</mapper>

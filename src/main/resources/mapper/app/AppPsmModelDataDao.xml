@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppPsmModelDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppPsmModelDataEntity" id="appPsmModelDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="sinGrit5D" column="SIN_GRIT_5_D"/>
+        <result property="sinGrit510" column="SIN_GRIT_5_10"/>
+        <result property="sinGrit1016" column="SIN_GRIT_10_16"/>
+        <result property="sinGrit1625" column="SIN_GRIT_16_25"/>
+        <result property="sinGrit2540" column="SIN_GRIT_25_40"/>
+        <result property="sinGrit40U" column="SIN_GRIT_40_U"/>
+        <result property="sinGritAvg" column="SIN_GRIT_AVG"/>
+        <result property="mixGrit3U" column="MIX_GRIT_3_U"/>
+        <result property="mixGrit3D" column="MIX_GRIT_3_D"/>
+    </resultMap>
+
+
+</mapper>

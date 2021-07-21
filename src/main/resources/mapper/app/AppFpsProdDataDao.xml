@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppFpsProdDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppFpsProdDataEntity" id="appFpsProdDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="plcC1Fq" column="PLC_C1_FQ"/>
+        <result property="plcC2Fq" column="PLC_C2_FQ"/>
+        <result property="plcC3Fq" column="PLC_C3_FQ"/>
+        <result property="plcC4Fq" column="PLC_C4_FQ"/>
+        <result property="plcC5Fq" column="PLC_C5_FQ"/>
+        <result property="plcC6Fq" column="PLC_C6_FQ"/>
+        <result property="plcC7Fq" column="PLC_C7_FQ"/>
+        <result property="plcP1Fq" column="PLC_P1_FQ"/>
+        <result property="plcP2Fq" column="PLC_P2_FQ"/>
+        <result property="plcP3Fq" column="PLC_P3_FQ"/>
+        <result property="plcF1Fq" column="PLC_F1_FQ"/>
+        <result property="plcF2Fq" column="PLC_F2_FQ"/>
+        <result property="plcF3Fq" column="PLC_F3_FQ"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppRTCurveDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppRTCurveEntity" id="appRTCurveMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="plcMaFan1Sp" column="PLC_MA_FAN_1_SP"/>
+        <result property="plcMaFan2Sp" column="PLC_MA_FAN_2_SP"/>
+        <result property="plcMaSb1FlueTe" column="PLC_MA_SB_1_FLUE_TE"/>
+        <result property="plcMaSb2FlueTe" column="PLC_MA_SB_2_FLUE_TE"/>
+        <result property="plcMaSb1FluePt" column="PLC_MA_SB_1_FLUE_PT"/>
+        <result property="plcMaSb2FluePt" column="PLC_MA_SB_2_FLUE_PT"/>
+        <result property="plcMaSb1FlueFt" column="PLC_MA_SB_1_FLUE_FT"/>
+        <result property="plcMaSb2FlueFt" column="PLC_MA_SB_2_FLUE_FT"/>
+        <result property="btpcalAvgXBtp" column="BTPCAL_AVG_X_BTP"/>
+        <result property="plcThickPv" column="PLC_THICK_PV"/>
+        <result property="tIgAvgTe" column="T_IG_AVG_TE"/>
+        <result property="plcTSpW" column="PLC_T_SP_W"/>
+        <result property="plc1mFtSp" column="PLC_1M_FT_SP"/>
+        <result property="plc2mFtSp" column="PLC_2M_FT_SP"/>
+        <result property="plcBlendLevel" column="PLC_BLEND_LEVEL"/>
+        <result property="plcStickSp" column="PLC_STICK_SP"/>
+        <result property="plcSinSpeedSp" column="PLC_SIN_SPEED_SP"/>
+        <result property="plcRcSpeedSp" column="PLC_RC_SPEED_SP"/>
+        <result property="calAirRC" column="CAL_AIR_R_C"/>
+    </resultMap>
+
+
+</mapper>

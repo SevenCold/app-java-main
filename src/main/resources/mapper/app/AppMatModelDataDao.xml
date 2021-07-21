@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppMatModelDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppMatModelDataEntity" id="appMatModelDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="l2ZllSp" column="L2_ZLL_SP"/>
+        <result property="l2ZllPv" column="L2_ZLL_PV"/>
+        <result property="l2Zgll" column="L2_ZGLL"/>
+        <result property="l2Llcl" column="L2_LLCL"/>
+        <result property="l2MbC" column="L2_MB_C"/>
+        <result property="l2MbR" column="L2_MB_R"/>
+        <result property="l2MbMg" column="L2_MB_MG"/>
+        <result property="l2PbWet1" column="L2_PB_WET_1"/>
+        <result property="l2PbWet2" column="L2_PB_WET_2"/>
+        <result property="l2PbWet3" column="L2_PB_WET_3"/>
+        <result property="l2PbWet4" column="L2_PB_WET_4"/>
+        <result property="l2PbWet5" column="L2_PB_WET_5"/>
+        <result property="l2PbWet6" column="L2_PB_WET_6"/>
+        <result property="l2PbWet7" column="L2_PB_WET_7"/>
+        <result property="l2PbWet8" column="L2_PB_WET_8"/>
+    </resultMap>
+
+
+</mapper>

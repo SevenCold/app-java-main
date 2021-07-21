@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppMixProdDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppMixProdDataEntity" id="appMixProdDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="plcTSpW" column="PLC_T_SP_W"/>
+        <result property="plcTPvW" column="PLC_T_PV_W"/>
+        <result property="plcW1" column="PLC_W_1"/>
+        <result property="plcW2" column="PLC_W_2"/>
+        <result property="plcW3" column="PLC_W_3"/>
+        <result property="plcW4" column="PLC_W_4"/>
+        <result property="plcW5" column="PLC_W_5"/>
+        <result property="plcW6" column="PLC_W_6"/>
+        <result property="plcW7" column="PLC_W_7"/>
+        <result property="plcW8" column="PLC_W_8"/>
+        <result property="plcW9" column="PLC_W_9"/>
+        <result property="plcW10" column="PLC_W_10"/>
+        <result property="plcW11" column="PLC_W_11"/>
+        <result property="plcW12" column="PLC_W_12"/>
+        <result property="plcW13" column="PLC_W_13"/>
+        <result property="plcW14" column="PLC_W_14"/>
+        <result property="plcW15" column="PLC_W_15"/>
+        <result property="plcW16" column="PLC_W_16"/>
+        <result property="plcW17" column="PLC_W_17"/>
+        <result property="plcW18" column="PLC_W_18"/>
+        <result property="plcW19" column="PLC_W_19"/>
+        <result property="plcW20" column="PLC_W_20"/>
+        <result property="plcPvW1" column="PLC_PV_W_1"/>
+        <result property="plcPvW2" column="PLC_PV_W_2"/>
+        <result property="plcPvW3" column="PLC_PV_W_3"/>
+        <result property="plcPvW4" column="PLC_PV_W_4"/>
+        <result property="plcPvW5" column="PLC_PV_W_5"/>
+        <result property="plcPvW6" column="PLC_PV_W_6"/>
+        <result property="plcPvW7" column="PLC_PV_W_7"/>
+        <result property="plcPvW8" column="PLC_PV_W_8"/>
+        <result property="plcPvW9" column="PLC_PV_W_9"/>
+        <result property="plcPvW10" column="PLC_PV_W_10"/>
+        <result property="plcPvW11" column="PLC_PV_W_11"/>
+        <result property="plcPvW12" column="PLC_PV_W_12"/>
+        <result property="plcPvW13" column="PLC_PV_W_13"/>
+        <result property="plcPvW14" column="PLC_PV_W_14"/>
+        <result property="plcPvW15" column="PLC_PV_W_15"/>
+        <result property="plcPvW16" column="PLC_PV_W_16"/>
+        <result property="plcPvW17" column="PLC_PV_W_17"/>
+        <result property="plcPvW18" column="PLC_PV_W_18"/>
+        <result property="plcPvW19" column="PLC_PV_W_19"/>
+        <result property="plcPvW20" column="PLC_PV_W_20"/>
+        <result property="plcBAcc1" column="PLC_B_ACC_1"/>
+        <result property="plcBAcc2" column="PLC_B_ACC_2"/>
+        <result property="plcBAcc3" column="PLC_B_ACC_3"/>
+        <result property="plcBAcc4" column="PLC_B_ACC_4"/>
+        <result property="plcBAcc5" column="PLC_B_ACC_5"/>
+        <result property="plcBAcc6" column="PLC_B_ACC_6"/>
+        <result property="plcBAcc7" column="PLC_B_ACC_7"/>
+        <result property="plcBAcc8" column="PLC_B_ACC_8"/>
+        <result property="plcBAcc9" column="PLC_B_ACC_9"/>
+        <result property="plcBAcc10" column="PLC_B_ACC_10"/>
+        <result property="plcBAcc11" column="PLC_B_ACC_11"/>
+        <result property="plcBAcc12" column="PLC_B_ACC_12"/>
+        <result property="plcBAcc13" column="PLC_B_ACC_13"/>
+        <result property="plcBAcc14" column="PLC_B_ACC_14"/>
+        <result property="plcBAcc15" column="PLC_B_ACC_15"/>
+        <result property="plcBAcc16" column="PLC_B_ACC_16"/>
+        <result property="plcBAcc17" column="PLC_B_ACC_17"/>
+        <result property="plcBAcc18" column="PLC_B_ACC_18"/>
+        <result property="plcBAcc19" column="PLC_B_ACC_19"/>
+        <result property="plcBAcc20" column="PLC_B_ACC_20"/>
+        <result property="plc1mBW" column="PLC_1M_B_W"/>
+        <result property="plc1mFtPv" column="PLC_1M_FT_PV"/>
+        <result property="plc1mPt" column="PLC_1M_PT"/>
+        <result property="plc1mAWaterPv" column="PLC_1M_A_WATER_PV"/>
+        <result property="plc1mAW" column="PLC_1M_A_W"/>
+        <result property="plc1mABSignal3" column="PLC_1M_A_B_SIGNAL_3"/>
+        <result property="plc2mABW" column="PLC_2M_A_B_W"/>
+        <result property="plc2mAW" column="PLC_2M_A_W"/>
+    </resultMap>
+
+
+</mapper>

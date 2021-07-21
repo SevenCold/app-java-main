@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppMpuProdDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppMpuProdDataEntity" id="appMpuProdDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="plcMaVe1PvOd" column="PLC_MA_VE_1_PV_OD"/>
+        <result property="plcMaSb1FluePt" column="PLC_MA_SB_1_FLUE_PT"/>
+        <result property="plcMaSb1FlueTe" column="PLC_MA_SB_1_FLUE_TE"/>
+        <result property="plcMaSb1FlueFt" column="PLC_MA_SB_1_FLUE_FT"/>
+        <result property="plcMaIn1FluePt" column="PLC_MA_IN_1_FLUE_PT"/>
+        <result property="plcMaOut1FluePt" column="PLC_MA_OUT_1_FLUE_PT"/>
+        <result property="plcMaOut1FlueO2" column="PLC_MA_OUT_1_FLUE_O2"/>
+        <result property="plcMaOut1FlueDt" column="PLC_MA_OUT_1_FLUE_DT"/>
+        <result property="plcMaOut1FlueTi" column="PLC_MA_OUT_1_FLUE_TI"/>
+        <result property="plcMa1Ec" column="PLC_MA_1_EC"/>
+        <result property="plcMa1W" column="PLC_MA_1_W"/>
+        <result property="plcMaVe2PvOd" column="PLC_MA_VE_2_PV_OD"/>
+        <result property="plcMaSb2FluePt" column="PLC_MA_SB_2_FLUE_PT"/>
+        <result property="plcMaSb2FlueTe" column="PLC_MA_SB_2_FLUE_TE"/>
+        <result property="plcMaSb2FlueFt" column="PLC_MA_SB_2_FLUE_FT"/>
+        <result property="plcMaIn2FluePi" column="PLC_MA_IN_2_FLUE_PI"/>
+        <result property="plcMaOut2FluePi" column="PLC_MA_OUT_2_FLUE_PI"/>
+        <result property="plcMaOut2FlueO2" column="PLC_MA_OUT_2_FLUE_O2"/>
+        <result property="plcMaOut2FlueDt" column="PLC_MA_OUT_2_FLUE_DT"/>
+        <result property="plcMaOut2FlueTi" column="PLC_MA_OUT_2_FLUE_TI"/>
+        <result property="plcMa2Ec" column="PLC_MA_2_EC"/>
+        <result property="plcMa2W" column="PLC_MA_2_W"/>
+    </resultMap>
+
+
+</mapper>

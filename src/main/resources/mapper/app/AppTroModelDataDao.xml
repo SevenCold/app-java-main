@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppTroModelDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppTroModelDataEntity" id="appTroModelDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="trolleyNum" column="TROLLEY_NUM"/>
+        <result property="wheelLState" column="WHEEL_L_STATE"/>
+        <result property="wheelLTest" column="WHEEL_L_TEST"/>
+        <result property="wheelRState" column="WHEEL_R_STATE"/>
+        <result property="wheelRTest" column="WHEEL_R_TEST"/>
+        <result property="boardLState" column="BOARD_L_STATE"/>
+        <result property="boardLTest" column="BOARD_L_TEST"/>
+        <result property="boardRState" column="BOARD_R_STATE"/>
+        <result property="boardRTest" column="BOARD_R_TEST"/>
+        <result property="gateDefectState" column="GATE_DEFECT_STATE"/>
+        <result property="gateDefectNum" column="GATE_DEFECT_NUM"/>
+    </resultMap>
+
+
+</mapper>

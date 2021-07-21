@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.McRealMonitor1minDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.McRealMonitor1minEntity" id="mcRealMonitor1minMap">
+        <result property="id" column="id"/>
+        <result property="tPlcMaFan1Sp3s" column="t_plc_ma_fan_1_sp_3s"/>
+        <result property="tPlcMaFan2Sp3s" column="t_plc_ma_fan_2_sp_3s"/>
+        <result property="tMaSb1FlueTe3s" column="t_ma_sb_1_flue_te_3s"/>
+        <result property="tMaSb2FlueTe3s" column="t_ma_sb_2_flue_te_3s"/>
+        <result property="tMaSb1FluePt3s" column="t_ma_sb_1_flue_pt_3s"/>
+        <result property="tMaSb2FluePt3s" column="t_ma_sb_2_flue_pt_3s"/>
+        <result property="tMaSb1FlueFt3s" column="t_ma_sb_1_flue_ft_3s"/>
+        <result property="tMaSb2FlueFt3s" column="t_ma_sb_2_flue_ft_3s"/>
+        <result property="btpcalOutTotalAvgXBtp" column="btpcal_out_total_avg_x_btp"/>
+        <result property="cThickPv3s" column="c_thick_pv_3s"/>
+        <result property="tIgTe3s" column="t_ig_te_3s"/>
+        <result property="tTotalSpW3s" column="t_total_sp_w_3s"/>
+        <result property="t1mFtSp3s" column="t_1m_ft_sp_3s"/>
+        <result property="tBlendLevel3s" column="t_blend_level_3s"/>
+        <result property="tStickSp3s" column="t_stick_sp_3s"/>
+        <result property="tSinMsSp3s" column="t_sin_ms_sp_3s"/>
+        <result property="tRcSpeedSp3s" column="t_rc_speed_sp_3s"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>

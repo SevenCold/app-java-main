@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppSccProdDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppSccProdDataEntity" id="appSccProdDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="plcRcSpeedPvHz" column="PLC_RC_SPEED_PV_HZ"/>
+        <result property="plcRcSpeedPv" column="PLC_RC_SPEED_PV"/>
+        <result property="plcRcInTe" column="PLC_RC_IN_TE"/>
+        <result property="plcRcOutTe" column="PLC_RC_OUT_TE"/>
+        <result property="plcRcHoodTe1" column="PLC_RC_HOOD_TE1"/>
+        <result property="plcRcHoodTe2" column="PLC_RC_HOOD_TE2"/>
+        <result property="plcRcBZt1Pv" column="PLC_RC_B_ZT_1_PV"/>
+        <result property="plcRcBZt2Pv" column="PLC_RC_B_ZT_2_PV"/>
+        <result property="plcRcBZt3Pv" column="PLC_RC_B_ZT_3_PV"/>
+        <result property="plcRcBZt4Pv" column="PLC_RC_B_ZT_4_PV"/>
+        <result property="plcRcIoW" column="PLC_RC_IO_W"/>
+        <result property="plcPfSpeedPv" column="PLC_PF_SPEED_PV"/>
+    </resultMap>
+
+
+</mapper>

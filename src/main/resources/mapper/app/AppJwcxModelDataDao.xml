@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppJwcxModelDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppJwcxModelDataEntity" id="appJwcxModelDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="maxTemp" column="MAX_TEMP"/>
+        <result property="minTemp" column="MIN_TEMP"/>
+        <result property="avgTemp" column="AVG_TEMP"/>
+        <result property="hat" column="HAT"/>
+        <result property="vssC" column="VSS_C"/>
+        <result property="cbt" column="CBT"/>
+        <result property="rfa" column="RFA"/>
+        <result property="burn" column="BURN"/>
+        <result property="edgeAvg" column="EDGE_AVG"/>
+        <result property="burnState" column="BURN_STATE"/>
+        <result property="ufmState" column="UFM_STATE"/>
+        <result property="edgeState" column="EDGE_STATE"/>
+        <result property="returnState" column="RETURN_STATE"/>
+        <result property="airPermState" column="AIR_PERM_STATE"/>
+        <result property="calProFeoState" column="CAL_PRO_FEO_STATE"/>
+    </resultMap>
+
+
+</mapper>

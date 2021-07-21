@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppSinterAnalysisDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppSinterAnalysisEntity" id="appSinterAnalysisMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="sampletime" column="SAMPLETIME"/>
+        <result property="reopttime" column="REOPTTIME"/>
+        <result property="batchNum" column="BATCH_NUM"/>
+        <result property="cTfe" column="C_TFE"/>
+        <result property="cFeo" column="C_FEO"/>
+        <result property="cCao" column="C_CAO"/>
+        <result property="cSio2" column="C_SIO2"/>
+        <result property="cAl2o3" column="C_AL2O3"/>
+        <result property="cMgo" column="C_MGO"/>
+        <result property="cS" column="C_S"/>
+        <result property="cP" column="C_P"/>
+        <result property="cC" column="C_C"/>
+        <result property="cMno" column="C_MNO"/>
+        <result property="cR" column="C_R"/>
+        <result property="cK2o" column="C_K2O"/>
+        <result property="cNa2o" column="C_NA2O"/>
+        <result property="cZno" column="C_ZNO"/>
+    </resultMap>
+
+
+</mapper>

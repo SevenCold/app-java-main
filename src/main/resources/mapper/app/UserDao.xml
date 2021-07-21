@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.UserDao">
+
+    <select id="getCidsByRoleId" resultType="java.lang.String" parameterType="java.lang.Long">
+        select s.cid from sys_user_role r left join sys_user s on r.user_id = s.user_id where r.role_id = #{roleId}
+    </select>
+
+</mapper>

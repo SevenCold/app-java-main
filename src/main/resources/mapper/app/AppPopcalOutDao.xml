@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppPopcalOutDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppPopcalOutEntity" id="appPopcalOutMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="aPAlOutput" column="A_P_AL_OUTPUT"/>
+        <result property="aAAlOutput" column="A_A_AL_OUTPUT"/>
+        <result property="aPAlOutputM" column="A_P_AL_OUTPUT_M"/>
+        <result property="aAAlOutputM" column="A_A_AL_OUTPUT_M"/>
+        <result property="aTSpW" column="A_T_SP_W"/>
+        <result property="aPlan" column="A_PLAN"/>
+    </resultMap>
+    <select id="getEveryMonthData" resultType="io.renren.modules.app.v1.entity.AppPopcalOutEntity">
+
+        -- 查询至今一年 每月最新一天的 月计划、月实际产量
+        SELECT
+            `TIMESTAMP`,
+            A_P_AL_OUTPUT_M,
+            A_A_AL_OUTPUT_M
+        FROM
+            APP_POPCAL_OUT
+        WHERE
+            `TIMESTAMP` IN (
+            SELECT
+            max(`TIMESTAMP`)
+            FROM
+            APP_POPCAL_OUT
+            WHERE
+            `timestamp` BETWEEN DATE_SUB(NOW(),INTERVAL 1 YEAR) AND NOW()
+            GROUP BY
+            DATE_FORMAT(`timestamp`, '%Y%m')
+            )
+    </select>
+
+
+</mapper>

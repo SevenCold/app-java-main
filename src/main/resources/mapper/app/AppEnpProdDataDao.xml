@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppEnpProdDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppEnpProdDataEntity" id="appEnpProdDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="plcNoseNox" column="PLC_NOSE_NOX"/>
+        <result property="plcNoseSox" column="PLC_NOSE_SOX"/>
+        <result property="plcNoseO2" column="PLC_NOSE_O2"/>
+        <result property="plcDust1C" column="PLC_DUST_1_C"/>
+        <result property="plc1noseInPt" column="PLC_1NOSE_IN_PT"/>
+        <result property="plc1noseOutPt" column="PLC_1NOSE_OUT_PT"/>
+        <result property="plc1noseInTe" column="PLC_1NOSE_IN_TE"/>
+        <result property="plc1noseOutTe" column="PLC_1NOSE_OUT_TE"/>
+        <result property="plcDust2C" column="PLC_DUST_2_C"/>
+        <result property="plc2noseInPt" column="PLC_2NOSE_IN_PT"/>
+        <result property="plc2noseOutPt" column="PLC_2NOSE_OUT_PT"/>
+        <result property="plc2noseInTe" column="PLC_2NOSE_IN_TE"/>
+        <result property="plc2noseOutTe" column="PLC_2NOSE_OUT_TE"/>
+        <result property="plcFgd1FanEc" column="PLC_FGD1_FAN_EC"/>
+        <result property="plcFgd1FanFq" column="PLC_FGD1_FAN_FQ"/>
+        <result property="plcFgd1P1" column="PLC_FGD1_P1"/>
+        <result property="plcFgd1P2" column="PLC_FGD1_P2"/>
+        <result property="plcFgd1Dp1" column="PLC_FGD1_DP1"/>
+        <result property="plcFgd1Dp2" column="PLC_FGD1_DP2"/>
+        <result property="plcFgd1Ti1" column="PLC_FGD1_TI1"/>
+        <result property="plcFgd1Ti2" column="PLC_FGD1_TI2"/>
+        <result property="plcFgd1InTi" column="PLC_FGD1_IN_TI"/>
+        <result property="plcFgd1OutTi" column="PLC_FGD1_OUT_TI"/>
+        <result property="plcFgd1InDt" column="PLC_FGD1_IN_DT"/>
+        <result property="plcFgd1OutDt" column="PLC_FGD1_OUT_DT"/>
+        <result property="plcFgd1DtDp" column="PLC_FGD1_DT_DP"/>
+        <result property="plcFgd1OutSo2" column="PLC_FGD1_OUT_SO2"/>
+        <result property="plcFgd1InSo2" column="PLC_FGD1_IN_SO2"/>
+        <result property="plcFgd1InNo" column="PLC_FGD1_IN_NO"/>
+        <result property="plcFgd1OutNo" column="PLC_FGD1_OUT_NO"/>
+        <result property="plcFgd1OutO2" column="PLC_FGD1_OUT_O2"/>
+        <result property="plcFgd2FanEc" column="PLC_FGD2_FAN_EC"/>
+        <result property="plcFgd2FanFq" column="PLC_FGD2_FAN_FQ"/>
+        <result property="plcFgd2P1" column="PLC_FGD2_P1"/>
+        <result property="plcFgd2P2" column="PLC_FGD2_P2"/>
+        <result property="plcFgd2Dp1" column="PLC_FGD2_DP1"/>
+        <result property="plcFgd2Dp2" column="PLC_FGD2_DP2"/>
+        <result property="plcFgd2Ti1" column="PLC_FGD2_TI1"/>
+        <result property="plcFgd2Ti2" column="PLC_FGD2_TI2"/>
+        <result property="plcFgd2InTi" column="PLC_FGD2_IN_TI"/>
+        <result property="plcFgd2OutTi" column="PLC_FGD2_OUT_TI"/>
+        <result property="plcFgd2InDt" column="PLC_FGD2_IN_DT"/>
+        <result property="plcFgd2OutDt" column="PLC_FGD2_OUT_DT"/>
+        <result property="plcFgd2DtDp" column="PLC_FGD2_DT_DP"/>
+        <result property="plcFgd2OutSo2" column="PLC_FGD2_OUT_SO2"/>
+        <result property="plcFgd2InSo2" column="PLC_FGD2_IN_SO2"/>
+        <result property="plcFgd2InNo" column="PLC_FGD2_IN_NO"/>
+        <result property="plcFgd2OutNo" column="PLC_FGD2_OUT_NO"/>
+        <result property="plcFgd2OutO2" column="PLC_FGD2_OUT_O2"/>
+    </resultMap>
+
+
+</mapper>
