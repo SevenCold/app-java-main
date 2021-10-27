@@ -1,11 +1,3 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
-
 package io.renren.config;
 
 import io.renren.modules.sys.oauth2.OAuth2Filter;
@@ -66,7 +58,7 @@ public class ShiroConfig {
         filterMap.put("/regist/**", "anon");
         filterMap.put("/test", "anon");
         //APP口放行
-        filterMap.put("/*/app/**", "anon");
+        filterMap.put("/app/**", "anon");
         filterMap.put("/excel/**", "anon");
         filterMap.put("/**", "oauth2");
         shiroFilter.setFilterChainDefinitionMap(filterMap);

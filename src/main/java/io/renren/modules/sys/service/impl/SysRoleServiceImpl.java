@@ -67,7 +67,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
         this.save(role);
 
         //检查权限是否越权
-        checkPrems(role);
+        //checkPrems(role);
 
         //保存角色与菜单关系
         sysRoleMenuService.saveOrUpdate(role.getRoleId(), role.getMenuIdList());
@@ -79,7 +79,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
         this.updateById(role);
 
         //检查权限是否越权
-        checkPrems(role);
+        //checkPrems(role);
         //删除Redis中的角色信息
         sysUserRoleService.deleteRedisRoleByRoleId(role.getRoleId());
         //更新角色与菜单关系
@@ -122,7 +122,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
 	 */
 	private void checkPrems(SysRoleEntity role){
 		//如果不是超级管理员，则需要判断角色的权限是否超过自己的权限
-		if(role.getCreateUserId() == Constant.SUPER_ADMIN){
+		if(role.getCreateUserId() != null && role.getCreateUserId() == Constant.SUPER_ADMIN){
 			return ;
 		}
 		

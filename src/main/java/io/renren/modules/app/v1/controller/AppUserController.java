@@ -20,6 +20,8 @@ import io.renren.modules.sys.entity.SysRoleEntity;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.form.PasswordForm;
 import io.renren.modules.sys.service.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +34,8 @@ import java.util.stream.Collectors;
  *
  */
 @RestController
-@RequestMapping("/v1/app/user")
+@RequestMapping("/app/v1/user")
+@Api("APP用户相关接口")
 public class AppUserController extends AbstractController {
 	@Autowired
 	private SysUserService sysUserService;
@@ -57,6 +60,7 @@ public class AppUserController extends AbstractController {
 	 * 所有用户列表
 	 */
 	@GetMapping("/list")
+	@ApiOperation("查询所有用户信息")
 	@Permitted("sys:user:list")
 	public R list(@RequestParam Map<String, Object> params, @LoginUser SysUserEntity user){
 		PageUtils page = sysUserService.queryPage(params);
@@ -67,6 +71,7 @@ public class AppUserController extends AbstractController {
 	 * 获取登录的用户信息
 	 */
 	@GetMapping("/info")
+	@ApiOperation("获取登录的用户信息")
 	@Login
 	public R info(@LoginUser AppUserEntity user){
 		return R.ok().put("user", user);
@@ -76,6 +81,7 @@ public class AppUserController extends AbstractController {
 	 * 修改登录用户密码
 	 */
 	@PostMapping("/password")
+	@ApiOperation("修改登录用户密码")
 	@Permitted("sys:user:update")
 	public R password(@RequestBody PasswordForm form){
 		Assert.isBlank(form.getNewPassword(), "新密码不为能空");
@@ -98,6 +104,7 @@ public class AppUserController extends AbstractController {
 	 * 用户信息
 	 */
 	@GetMapping("/info/{userId}")
+	@ApiOperation("根据用户id查询用户信息")
 	@Permitted("sys:user:info")
 	public R info(@PathVariable("userId") Long userId){
 		SysUserEntity user = sysUserService.getById(userId);
@@ -114,6 +121,7 @@ public class AppUserController extends AbstractController {
 	 * 修改用户
 	 */
 	@PostMapping("/update")
+	@ApiOperation("修改用户信息")
 	@Permitted("sys:user:update")
 	public R update(@RequestBody AppUserEntity user, @LoginUser AppUserEntity loginUser){
 		ValidatorUtils.validateEntity(user, UpdateGroup.class);
@@ -139,6 +147,7 @@ public class AppUserController extends AbstractController {
 	 * 删除用户
 	 */
 	@PostMapping("/delete")
+	@ApiOperation("删除用户")
 	@Permitted("sys:user:delete")
 	public R delete(@RequestBody Long userId, @LoginUser SysUserEntity loginUser){
 		if(Constant.SUPER_ADMIN == userId){
@@ -160,6 +169,7 @@ public class AppUserController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/role/list")
+	@ApiOperation("获取所有角色列表（用于复选框）")
 	@Login
 	public R select(@LoginUser SysUserEntity user){
 		Map<String, Object> map = new HashMap<>();
@@ -173,6 +183,7 @@ public class AppUserController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/role/page")
+	@ApiOperation("获取分页的角色列表（用于查询）")
 	@Permitted("sys:role:select")
 	public R select(@RequestParam Map<String, Object> params){
 		PageUtils page = sysRoleService.queryPage(params);
@@ -180,6 +191,7 @@ public class AppUserController extends AbstractController {
 	}
 
 	@GetMapping("/menu/list")
+	@ApiOperation("查询菜单列表")
 	@Permitted("sys:menu:list")
 	public R getMenulist(){
 		List<SysMenuEntity> menuList = sysMenuService.list();
@@ -198,6 +210,7 @@ public class AppUserController extends AbstractController {
 	}
 
 	@PostMapping("/role/save")
+	@ApiOperation("保存角色信息")
 	@Permitted("sys:role:save")
 	public R save(@RequestBody SysRoleEntity role, @LoginUser SysUserEntity user){
 		ValidatorUtils.validateEntity(role);
@@ -211,6 +224,7 @@ public class AppUserController extends AbstractController {
 	}
 
 	@GetMapping("/role/info/{roleId}")
+	@ApiOperation("获取角色信息")
 	@Permitted("sys:role:info")
 	public R roleInfo(@PathVariable("roleId") Long roleId){
 		SysRoleEntity role = sysRoleService.getById(roleId);
@@ -224,6 +238,7 @@ public class AppUserController extends AbstractController {
 
 
 	@PostMapping("/role/delete")
+	@ApiOperation("删除角色")
 	@Permitted("sys:role:delete")
 	public R delete(@RequestBody Long[] roleIds){
 		sysRoleService.deleteBatch(roleIds);

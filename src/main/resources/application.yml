@@ -11,7 +11,7 @@ server:
 spring:
   # 环境 dev|test|prod
   profiles:
-    active: dev
+    active: prod
   # jackson时间格式化
   jackson:
     time-zone: GMT+8
@@ -33,6 +33,11 @@ spring:
         min-idle: 5       # 连接池中的最小空闲连接
   mvc:
     throw-exception-if-no-handler-found: true
+  devtools:
+      livereload:
+        enabled: false
+      restart:
+          enabled: false
 
 #mybatis
 mybatis-plus:
@@ -68,7 +73,9 @@ yjs:
     masterSecret: JS8HttUuNW9PI5WlP6VTV2
     avatarPath: avatar # linux下头像文件夹名称 地址为/mnt/project/app/avatar
     apkPath: apk # linux下apk文件夹名称 地址为/mnt/project/app/apk
-    domain: https://www.goobad.cn/app/ # 域名，可外网访问
+    reportsPath: reports # linux下apk文件夹名称 地址为/mnt/project/app/reports
+    reportsUrl: http://39.99.142.150/reports/ # 报表下载地址
+    domain: http://39.99.142.150/ # 域名，可外网访问
 renren:
   # APP模块，是通过jwt认证的，如果要使用APP模块，则需要修改【加密秘钥】
   jwt:

@@ -4,13 +4,17 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.renren.common.utils.Constant;
 import io.renren.common.utils.R;
 import io.renren.common.utils.SqlUtils;
+import io.renren.modules.app.v1.annotation.Login;
 import io.renren.modules.app.v1.entity.*;
 import io.renren.modules.app.v1.service.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +32,8 @@ import java.util.Map;
  * @date 2021-03-09 13:19:38
  */
 @RestController
-@RequestMapping("/v1/app/bus")
+@RequestMapping("/app/v1/bus")
+@Api("APP业务信息接口")
 public class AppBusController {
 
     @Autowired
@@ -69,26 +74,9 @@ public class AppBusController {
     @Autowired
     private AppJwcxModelDataService appJwcxModelDataService;
 
-
-    /**
-     * 列表
-     */
-    @RequestMapping("/art")
-    public R list(@RequestParam Map<String, Object> params){
-        List<McRealMonitor1minEntity> realArt = appBusService.getRealArt(params);
-        return R.ok(realArt);
-    }
-
-    /**
-     * 信息
-     */
-    @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id){
-		McRealMonitor1minEntity mcRealMonitor1min = appBusService.getById(id);
-        return R.ok().put("mcRealMonitor1min", mcRealMonitor1min);
-    }
-
-    @RequestMapping("/peihun/table")
+    @Login
+    @GetMapping("/peihun/table")
+    @ApiOperation("【主页-配混】最新一条数据")
     public R peiHunTable() {
         List<AppMixProdDataEntity> list = appMixProdDataService.lambdaQuery()
                 .orderByDesc(AppMixProdDataEntity::getTimestamp)
@@ -97,7 +85,9 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/peihun/line")
+    @Login
+    @GetMapping("/peihun/line")
+    @ApiOperation("【主页-配混】曲线信息")
     public R peiHunLine(@RequestParam Map<String, Object> params) throws ParseException {
         List<AppMixProdDataEntity> list = appMixProdDataService.lambdaQuery()
                 .select(AppMixProdDataEntity::getTimestamp, AppMixProdDataEntity::getPlc1mBW,
@@ -122,7 +112,9 @@ public class AppBusController {
         return R.ok().put("data", JSONUtil.toJsonStr(list));
     }
 
-    @RequestMapping("/shaojie")
+    @GetMapping("/shaojie")
+    @Login
+    @ApiOperation("【主页-烧结】最新一条数据")
     public R shaojie() {
         List<AppSinProdDataEntity> list = appSinProdDataService.lambdaQuery()
                 .orderByDesc(AppSinProdDataEntity::getTimestamp)
@@ -131,7 +123,9 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/shaojie/line")
+    @GetMapping("/shaojie/line")
+    @Login
+    @ApiOperation("【主页-烧结】图表信息")
     public R shaojieLine(@RequestParam Map<String, Object> params) throws ParseException {
         List<AppSinProdDataEntity> list = appSinProdDataService.lambdaQuery()
                 .select(AppSinProdDataEntity::getTimestamp, AppSinProdDataEntity::getPlcXTrpOut,
@@ -155,7 +149,9 @@ public class AppBusController {
         return R.ok().put("data", JSONUtil.toJsonStr(list));
     }
 
-    @RequestMapping("/shaileng")
+    @GetMapping("/shaileng")
+    @Login
+    @ApiOperation("【主页-筛冷】最新一条数据")
     public R shaileng() {
         List<AppSccProdDataEntity> list = appSccProdDataService.lambdaQuery()
                 .orderByDesc(AppSccProdDataEntity::getTimestamp)
@@ -164,7 +160,9 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/zhuchou/line")
+    @GetMapping("/zhuchou/line")
+    @Login
+    @ApiOperation("【主页-主抽】图表数据")
     public R zhuchou(@RequestParam Map<String, Object> params) {
         List<AppMpuProdDataEntity> list = appMpuProdDataService.lambdaQuery()
                 .apply(params.containsKey(Constant.START),
@@ -184,7 +182,9 @@ public class AppBusController {
         return R.ok().put("data", JSONUtil.toJsonStr(list));
     }
 
-    @RequestMapping("/chengpin/line")
+    @GetMapping("/chengpin/line")
+    @Login
+    @ApiOperation("【主页-成品】图表数据")
     public R chengpin(@RequestParam Map<String, Object> params) {
         List<AppFpsProdDataEntity> list = appFpsProdDataService.lambdaQuery()
                 .apply(params.containsKey(Constant.START),
@@ -203,7 +203,9 @@ public class AppBusController {
         return R.ok().put("data", JSONUtil.toJsonStr(list));
     }
 
-    @RequestMapping("/huanbao")
+    @GetMapping("/huanbao")
+    @Login
+    @ApiOperation("【主页-环保】最新一条数据")
     public R huanbao() {
         List<AppEnpProdDataEntity> list = appEnpProdDataService.lambdaQuery()
                 .orderByDesc(AppEnpProdDataEntity::getTimestamp)
@@ -212,45 +214,58 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/tingji")
-    public R tingji() {
+    @GetMapping("/tingji")
+    @Login
+    @ApiOperation("【主页-停机记录】一个月内记录")
+    public R tingji(@RequestParam Map<String, Object> params) {
         // 查询一个月内的停机记录
         String now = DateUtil.date().toString(DatePattern.NORM_DATETIME_MINUTE_PATTERN);
         String lastMonth = DateUtil.lastMonth().toString(DatePattern.NORM_DATETIME_MINUTE_PATTERN);
-        List<AppSinRunStopEntity> list = appSinRunStopService.lambdaQuery()
-                .apply(SqlUtils.getGtTimeSql("timestamp", lastMonth, Constant.MINUTE_FORMAT))
-                .apply(SqlUtils.getLtTimeSql("timestamp", now, Constant.MINUTE_FORMAT))
-                .orderByDesc(AppSinRunStopEntity::getTimestamp)
-                .list();
-        return R.ok(list);
+        params.put(Constant.START, lastMonth);
+        params.put(Constant.END, now);
+        IPage<AppSinRunStopEntity> page = appSinRunStopService.queryPage(params);
+        return R.ok(page.getRecords());
     }
 
-    @RequestMapping("/shijian")
-    public R shijian() {
+    @GetMapping("/shijian")
+    @Login
+    @ApiOperation("【主页-事件记录】一个月内记录")
+    public R shijian(@RequestParam Map<String, Object> params) {
         // 查询一个月内的事件记录
         String now = DateUtil.date().toString(DatePattern.NORM_DATETIME_MINUTE_PATTERN);
         String lastMonth = DateUtil.lastMonth().toString(DatePattern.NORM_DATETIME_MINUTE_PATTERN);
-        List<AppEventInforEntity> list = appEventInforService.lambdaQuery()
-                .apply(SqlUtils.getGtTimeSql("timestamp", lastMonth, Constant.MINUTE_FORMAT))
-                .apply(SqlUtils.getLtTimeSql("timestamp", now, Constant.MINUTE_FORMAT))
-                .orderByDesc(AppEventInforEntity::getTimestamp)
-                .list();
-        return R.ok(list);
+        params.put(Constant.START, lastMonth);
+        params.put(Constant.END, now);
+        IPage<AppEventInforEntity> page = appEventInforService.queryPage(params);
+        return R.ok(page.getRecords());
     }
 
-    @RequestMapping("/zhuangtai")
-    public R zhuangtai() {
+    @GetMapping("/monitor")
+    @Login
+    @ApiOperation("【状态监控】图表数据")
+    public R zhuangtai(@RequestParam Map<String, Object> params) {
         List<AppRTCurveEntity> list = appRTCurveService.lambdaQuery()
-                .orderByDesc(AppRTCurveEntity::getTimestamp)
-                .last("limit 1")
+                .apply(params.containsKey(Constant.START),
+                        SqlUtils.getGtTimeSql("timestamp", params.get(Constant.START), Constant.MINUTE_FORMAT))
+                .apply(params.containsKey(Constant.END),
+                        SqlUtils.getLtTimeSql("timestamp", params.get(Constant.END), Constant.MINUTE_FORMAT))
+                .orderByAsc(AppRTCurveEntity::getTimestamp)
                 .list();
-        return R.ok(list);
+        if (CollectionUtil.isNotEmpty(list)) {
+            SimpleDateFormat hdf = new SimpleDateFormat("HH:mm");
+            list.forEach(e -> {
+                e.setTimeStr(hdf.format(e.getTimestamp()));
+                e.setTimestamp(null);
+            });
+        }
+        return R.ok().put("data", JSONUtil.toJsonStr(list));
     }
 
-    @RequestMapping("/changliang/day")
+    @GetMapping("/changliang/day")
+    @Login
+    @ApiOperation("【分析-产量】最新一条记录")
     public R changliangDay() {
-        //String nowDay = DateUtil.date().toString(DatePattern.NORM_DATE_FORMAT);
-        String nowDay = "2021-07-14";
+        String nowDay = DateUtil.date().toString(DatePattern.NORM_DATE_FORMAT);
         List<AppPopcalOutEntity> list = appPopcalOutService.lambdaQuery()
                 .apply(SqlUtils.getEtTimeSql("timestamp", nowDay, Constant.DAY_FORMAT))
                 .orderByDesc(AppPopcalOutEntity::getTimestamp)
@@ -259,7 +274,9 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/changliang/month")
+    @GetMapping("/changliang/month")
+    @Login
+    @ApiOperation("【分析-产量】至今一个月图表数据")
     public R changliangMonth() {
         List<AppPopcalOutEntity> list = appPopcalOutService.lambdaQuery()
                 .select(AppPopcalOutEntity::getAAAlOutput, AppPopcalOutEntity::getTimestamp, AppPopcalOutEntity::getAPAlOutput)
@@ -276,7 +293,9 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/changliang/year")
+    @GetMapping("/changliang/year")
+    @Login
+    @ApiOperation("【分析-产量】至今一年图表数据")
     public R changliangYear() {
         List<AppPopcalOutEntity> list = appPopcalOutService.getEveryMonthData();
         if (CollectionUtil.isNotEmpty(list)) {
@@ -288,19 +307,23 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/yuanliao")
+    @GetMapping("/yuanliao")
+    @Login
+    @ApiOperation("【分析-原料消耗】表格数据")
     public R yuanliao(@RequestParam Map<String, Object> params) {
         List<AppRmcModelDataEntity> list = appRmcModelDataService.lambdaQuery()
                 .apply(params.containsKey(Constant.START),
                         SqlUtils.getGtTimeSql("timestamp", params.get(Constant.START), Constant.MINUTE_FORMAT))
                 .apply(params.containsKey(Constant.END),
                         SqlUtils.getLtTimeSql("timestamp", params.get(Constant.END), Constant.MINUTE_FORMAT))
-                .orderByAsc(AppRmcModelDataEntity::getTimestamp)
+                .orderByDesc(AppRmcModelDataEntity::getTimestamp)
                 .list();
         return R.ok(list);
     }
 
-    @RequestMapping("/chengfen")
+    @GetMapping("/chengfen")
+    @Login
+    @ApiOperation("【分析-原料成分】表格数据")
     public R chengfen(@RequestParam Map<String, Object> params) {
         List<AppMaterialAnalysisEntity> list = appMaterialAnalysisService.lambdaQuery()
                 .apply(params.containsKey(Constant.START),
@@ -312,17 +335,17 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/chengpinFx")
-    public R chengpinFx() {
-        List<AppSinterAnalysisEntity> list = appSinterAnalysisService.lambdaQuery()
-                // 至今一个月
-                .apply("timestamp between date_sub(now(),interval 1 month) and now()")
-                .orderByDesc(AppSinterAnalysisEntity::getTimestamp)
-                .list();
-        return R.ok(list);
+    @GetMapping("/chengpinFx")
+    @Login
+    @ApiOperation("【分析-成品】一个月数据")
+    public R chengpinFx(@RequestParam Map<String, Object> params) {
+        IPage<AppSinterAnalysisEntity> page = appSinterAnalysisService.queryPage(params);
+        return R.ok(page.getRecords());
     }
 
-    @RequestMapping("/peiliao")
+    @GetMapping("/peiliao")
+    @Login
+    @ApiOperation("【分析-配料】最新一条数据")
     public R peiliao() {
         List<AppMatModelDataEntity> list = appMatModelDataService.lambdaQuery()
                 .orderByDesc(AppMatModelDataEntity::getTimestamp)
@@ -331,7 +354,9 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/peiliao/line")
+    @GetMapping("/peiliao/line")
+    @Login
+    @ApiOperation("【分析-配料】图表数据")
     public R peiliaoLine(@RequestParam Map<String, Object> params) {
         List<AppMatModelDataEntity> list = appMatModelDataService.lambdaQuery()
                 .select(AppMatModelDataEntity::getTimestamp,AppMatModelDataEntity::getL2PbWet1, AppMatModelDataEntity::getL2PbWet2, AppMatModelDataEntity::getL2PbWet3,
@@ -353,7 +378,9 @@ public class AppBusController {
         return R.ok().put("data", JSONUtil.toJsonStr(list));
     }
 
-    @RequestMapping("/lidu")
+    @GetMapping("/lidu")
+    @Login
+    @ApiOperation("【分析-粒度】图表数据")
     public R lidu(@RequestParam Map<String, Object> params) {
         List<AppPsmModelDataEntity> list = appPsmModelDataService.lambdaQuery()
                 .apply(params.containsKey(Constant.START),
@@ -372,7 +399,9 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/taiche")
+    @GetMapping("/taiche")
+    @Login
+    @ApiOperation("【分析-台车】表格数据")
     public R taiche(@RequestParam Map<String, Object> params) {
         Object no = params.get("no");
         List<AppTroModelDataEntity> list;
@@ -392,14 +421,16 @@ public class AppBusController {
             // 查询指定编号的台车
             list = appTroModelDataService.lambdaQuery()
                     .eq(AppTroModelDataEntity::getTrolleyNum, no)
-                    .orderByDesc(AppTroModelDataEntity::getTrolleyNum)
+                    .orderByAsc(AppTroModelDataEntity::getTrolleyNum)
                     .last("limit 1")
                     .list();
         }
         return R.ok(list);
     }
 
-    @RequestMapping("/jiwei")
+    @GetMapping("/jiwei")
+    @Login
+    @ApiOperation("【分析-机尾】最新一条数据")
     public R jiwei() {
         List<AppJwcxModelDataEntity> list = appJwcxModelDataService.lambdaQuery()
                 .select(AppJwcxModelDataEntity::getTimestamp, AppJwcxModelDataEntity::getBurnState, AppJwcxModelDataEntity::getUfmState, AppJwcxModelDataEntity::getEdgeState,
@@ -410,7 +441,9 @@ public class AppBusController {
         return R.ok(list);
     }
 
-    @RequestMapping("/jiwei/line")
+    @GetMapping("/jiwei/line")
+    @Login
+    @ApiOperation("【分析-机尾】图表数据")
     public R jiweiLine(@RequestParam Map<String, Object> params) {
         List<AppJwcxModelDataEntity> list = appJwcxModelDataService.lambdaQuery()
                 .select(AppJwcxModelDataEntity::getTimestamp, AppJwcxModelDataEntity::getMaxTemp, AppJwcxModelDataEntity::getMinTemp,

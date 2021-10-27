@@ -1,5 +1,8 @@
 package io.renren.modules.app.v1.resolver;
 
+import cn.hutool.json.JSONUtil;
+import io.renren.common.utils.RedisKeys;
+import io.renren.common.utils.RedisUtils;
 import io.renren.modules.app.v1.annotation.LoginUser;
 import io.renren.modules.app.v1.entity.AppUserEntity;
 import io.renren.modules.app.v1.interceptor.AuthorizationInterceptor;
@@ -22,6 +25,8 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
 
     @Autowired
     private AppUserService userService;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -36,6 +41,10 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
         if(userId == null){
             return null;
         }
-        return userService.getById((Long)userId);
+        String redisUserStr = redisUtils.get(RedisKeys.getUserInfoKey((Long)userId));
+        AppUserEntity redisUser = JSONUtil.toBean(redisUserStr, AppUserEntity.class);
+        AppUserEntity dbUser = userService.getById((Long) userId);
+        dbUser.setToken(redisUser.getToken());
+        return dbUser;
     }
 }

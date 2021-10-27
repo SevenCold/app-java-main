@@ -24,4 +24,7 @@ public class TableInfo {
 
     @ExcelProperty(index = 4, value = "字段描述")
     private String comment;
+
+    @ExcelProperty(index = 5, value = "单位")
+    private String unit;
 }

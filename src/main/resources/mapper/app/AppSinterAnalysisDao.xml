@@ -24,6 +24,35 @@
         <result property="cNa2o" column="C_NA2O"/>
         <result property="cZno" column="C_ZNO"/>
     </resultMap>
+    <select id="selectPageVo" resultType="io.renren.modules.app.v1.entity.AppSinterAnalysisEntity">
+        SELECT
+            TIMESTAMP,
+            sampletime,
+            reopttime,
+            batch_num,
+            c_tfe,
+            c_feo,
+            c_cao,
+            c_sio2,
+            c_al2o3,
+            c_mgo,
+            c_s,
+            c_p,
+            c_c,
+            c_mno,
+            c_r,
+            c_k2o,
+            c_na2o,
+            c_zno
+        FROM
+            APP_SINTER_ANALYSIS
+        WHERE
+            (
+            TIMESTAMP BETWEEN date_sub( now(), INTERVAL 1 MONTH )
+          AND now())
+        ORDER BY
+            TIMESTAMP DESC
+    </select>
 
 
 </mapper>

@@ -12,6 +12,22 @@
         <result property="aStopEndtime" column="A_STOP_ENDTIME"/>
         <result property="aIntervalTime" column="A_INTERVAL_TIME"/>
     </resultMap>
+    <select id="queryByPage" resultMap="appSinRunStopMap">
+        SELECT
+        TIMESTAMP,
+        a_work_shift,
+        a_work_team,
+        a_stop_begintime,
+        a_stop_endtime,
+        a_interval_time
+        FROM
+        APP_SIN_RUN_STOP
+        WHERE
+        ( date_format ( TIMESTAMP, '%Y-%m-%d %H:%i' ) <![CDATA[ >= ]]> #{params.startTime}
+        AND date_format ( TIMESTAMP, '%Y-%m-%d %H:%i' ) <![CDATA[ <= ]]> #{params.endTime} )
+        ORDER BY
+        TIMESTAMP DESC
+    </select>
 
 
 </mapper>

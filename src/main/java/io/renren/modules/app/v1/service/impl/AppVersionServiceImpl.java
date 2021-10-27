@@ -18,7 +18,8 @@ public class AppVersionServiceImpl extends ServiceImpl<AppVersionDao, AppVersion
     public AppVersionEntity getLatestAppVersion(String currentVersion) {
         // 查询大于当前版本号的版本信息
         return this.baseMapper.selectOne(
-                new QueryWrapper<AppVersionEntity>().gt("version_code", currentVersion));
+                new QueryWrapper<AppVersionEntity>().gt("version_code", currentVersion)
+                        .orderByDesc("id").last("limit 1"));
     }
 
     @Override

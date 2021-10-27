@@ -10,6 +10,20 @@
         <result property="aWorkTeam" column="A_WORK_TEAM"/>
         <result property="aRemarkDesc" column="A_REMARK_DESC"/>
     </resultMap>
+    <select id="queryByPage" resultMap="appEventInforMap">
+        SELECT
+        TIMESTAMP,
+        a_work_shift,
+        a_work_team,
+        a_remark_desc
+        FROM
+        APP_EVENT_INFOR
+        WHERE
+        ( date_format ( TIMESTAMP, '%Y-%m-%d %H:%i' ) <![CDATA[ >= ]]> #{params.startTime}
+        AND date_format ( TIMESTAMP, '%Y-%m-%d %H:%i' ) <![CDATA[ <= ]]> #{params.endTime} )
+        ORDER BY
+        TIMESTAMP DESC
+    </select>
 
 
 </mapper>

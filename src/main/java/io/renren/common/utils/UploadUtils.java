@@ -75,7 +75,7 @@ public class UploadUtils {
     /**
      * 获取当前系统路径
      */
-    private String getUploadPath(String folder) {
+    public static String getUploadPath(String folder) {
         File path = null;
         try {
             path = new File(ResourceUtils.getURL("classpath:").getPath());

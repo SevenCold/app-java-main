@@ -1,7 +1,7 @@
 package io.renren.modules.app.v1.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import io.renren.common.utils.PageUtils;
 import io.renren.modules.app.v1.entity.AppSinterAnalysisEntity;
 
 import java.util.Map;
@@ -15,6 +15,6 @@ import java.util.Map;
  */
 public interface AppSinterAnalysisService extends IService<AppSinterAnalysisEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    IPage<AppSinterAnalysisEntity> queryPage(Map<String, Object> params);
 }
 

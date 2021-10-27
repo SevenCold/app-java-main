@@ -1,7 +1,9 @@
 package io.renren.modules.app.v1.dao;
 
-import io.renren.modules.app.v1.entity.AppSinterAnalysisEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.renren.modules.app.v1.entity.AppSinterAnalysisEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -13,5 +15,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AppSinterAnalysisDao extends BaseMapper<AppSinterAnalysisEntity> {
-	
+
+    IPage<AppSinterAnalysisEntity> selectPageVo(Page<?> page);
 }

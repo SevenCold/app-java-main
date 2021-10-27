@@ -1,5 +1,7 @@
 package io.renren.modules.app.v1.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.renren.modules.app.v1.entity.AppSinRunStopEntity;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -17,13 +19,9 @@ import io.renren.modules.app.v1.service.AppEventInforService;
 public class AppEventInforServiceImpl extends ServiceImpl<AppEventInforDao, AppEventInforEntity> implements AppEventInforService {
 
     @Override
-    public PageUtils queryPage(Map<String, Object> params) {
-        IPage<AppEventInforEntity> page = this.page(
-                new Query<AppEventInforEntity>().getPage(params),
-                new QueryWrapper<AppEventInforEntity>()
-        );
-
-        return new PageUtils(page);
+    public IPage<AppEventInforEntity> queryPage(Map<String, Object> params) {
+        Page<AppEventInforEntity> page = (Page<AppEventInforEntity>) new Query<AppEventInforEntity>().getPage(params);
+        return this.baseMapper.queryByPage(page, params);
     }
 
 }

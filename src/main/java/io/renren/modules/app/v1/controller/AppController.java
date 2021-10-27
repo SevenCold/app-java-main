@@ -5,7 +5,10 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import io.renren.common.enums.ErrorMsgEnum;
 import io.renren.common.enums.UserStatusEnum;
-import io.renren.common.utils.*;
+import io.renren.common.utils.Constant;
+import io.renren.common.utils.R;
+import io.renren.common.utils.RedisKeys;
+import io.renren.common.utils.RedisUtils;
 import io.renren.common.validator.ValidatorUtils;
 import io.renren.modules.app.v1.VO.AppUserVo;
 import io.renren.modules.app.v1.annotation.Login;
@@ -13,16 +16,15 @@ import io.renren.modules.app.v1.annotation.LoginUser;
 import io.renren.modules.app.v1.annotation.Permitted;
 import io.renren.modules.app.v1.entity.AppUserEntity;
 import io.renren.modules.app.v1.entity.AppVersionEntity;
-import io.renren.modules.app.v1.enums.FileTypeEnum;
 import io.renren.modules.app.v1.enums.RoleEnum;
-import io.renren.modules.app.v1.service.AppNoticeService;
-import io.renren.modules.app.v1.service.AppVersionService;
-import io.renren.modules.app.v1.service.BusInfoService;
-import io.renren.modules.app.v1.service.AppUserService;
-import io.renren.modules.app.v1.utils.JwtUtils;
-import io.renren.modules.app.v1.utils.NoticeUtils;
 import io.renren.modules.app.v1.group.AppLoginGroup;
 import io.renren.modules.app.v1.group.AppRegistGroup;
+import io.renren.modules.app.v1.service.AppNoticeService;
+import io.renren.modules.app.v1.service.AppUserService;
+import io.renren.modules.app.v1.service.AppVersionService;
+import io.renren.modules.app.v1.service.BusInfoService;
+import io.renren.modules.app.v1.utils.JwtUtils;
+import io.renren.modules.app.v1.utils.NoticeUtils;
 import io.renren.modules.sys.controller.AbstractController;
 import io.renren.modules.sys.form.AppNoticeForm;
 import io.renren.modules.sys.form.SysLoginForm;
@@ -30,17 +32,12 @@ import io.renren.modules.sys.service.SysUserRoleService;
 import io.renren.modules.sys.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.text.ParseException;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -48,8 +45,8 @@ import java.util.Set;
  * @author kang
  */
 @RestController
-@RequestMapping("/v1/app")
-@Api("APP使用接口")
+@RequestMapping("/app/v1")
+@Api("APP登录注册接口")
 public class AppController extends AbstractController {
 
     @Autowired
@@ -75,12 +72,6 @@ public class AppController extends AbstractController {
 
     @Autowired
     private AppUserService appUserService;
-
-    @Autowired
-    private UploadUtils uploadUtils;
-
-    @Value("${yjs.app.avatarPath}")
-    private String avatarPath;
 
     /**
      * APP注册
@@ -182,23 +173,6 @@ public class AppController extends AbstractController {
     }
 
     /**
-     * APP折现图
-     * @param map 查询条件
-     * @return 折现信息
-     */
-    @Login
-    @GetMapping("/businfo")
-    @ApiOperation("折现图信息")
-    public R busInfo(@RequestParam Map<String, String> map) {
-        try {
-            return R.ok(busInfoService.getBusInfoByCondition(map));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return ErrorMsgEnum.TIME_PATTERN_ERROR.getR();
-        }
-    }
-
-    /**
      * APP发送系统通知
      * @param noticeForm 发送内容
      * @return 发送结果
@@ -223,64 +197,17 @@ public class AppController extends AbstractController {
     }
 
     /**
-     * 修改用户昵称
-     * @param name 新昵称
-     * @param user 登陆用户
-     * @return 修改成功
+     * 退出登录，清空redis信息
      */
-    @PostMapping("/updateNickName/{name}")
+    @GetMapping("/logout")
+    @ApiOperation("获取版本号")
     @Login
-    @ApiOperation("修改用户昵称")
-    public R updateName(@PathVariable("name")String name, @LoginUser AppUserEntity user) {
-        LambdaUpdateWrapper<AppUserEntity> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(AppUserEntity::getUserId, user.getUserId())
-                .set(AppUserEntity::getNickName, name);
-        appUserService.update(updateWrapper);
+    public R getVersion(@LoginUser AppUserEntity user) {
+        // 踢用户下线
+        redisUtils.delete(RedisKeys.getSysUserTokenKey(user.getToken()));
+        redisUtils.delete(RedisKeys.getUserRoleKey(user.getUserId()));
+        redisUtils.delete(RedisKeys.getUserInfoKey(user.getUserId()));
         return R.ok();
-    }
-
-    /**
-     * 修改用户密码
-     * @param pwd 新密码
-     * @param user 登陆用户
-     * @return 修改成功
-     */
-    @PostMapping("/updatePwd/{pwd}")
-    @Login
-    @ApiOperation("修改用户密码")
-    public R updatePwd(@PathVariable("pwd")String pwd, @LoginUser AppUserEntity user) {
-        //sha256加密
-        String salt = RandomStringUtils.randomAlphanumeric(20);
-        LambdaUpdateWrapper<AppUserEntity> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(AppUserEntity::getUserId, user.getUserId())
-                .set(AppUserEntity::getPassword, new Sha256Hash(pwd, salt).toHex())
-                .set(AppUserEntity::getSalt, salt);
-        appUserService.update(updateWrapper);
-        return R.ok();
-    }
-
-    /**
-     * 用户上传新头像
-     * @param file 用户头像文件
-     * @param user 登陆用户
-     * @return 用户头像访问url
-     */
-    @PostMapping("/updateAvatar")
-    @Login
-    @ApiOperation("修改用户头像")
-    public R updateAvatar(@RequestParam("file") MultipartFile file, @LoginUser AppUserEntity user) {
-        String suffix = uploadUtils.getSuffix(file);
-        if (!FileTypeEnum.JPEG.getType().equalsIgnoreCase(suffix)
-                && !FileTypeEnum.JPG.getType().equalsIgnoreCase(suffix)
-                && !FileTypeEnum.PNG.getType().equalsIgnoreCase(suffix)) {
-            return ErrorMsgEnum.ERROR_JPG.getR();
-        }
-        String url = uploadUtils.upload(file, avatarPath);
-        LambdaUpdateWrapper<AppUserEntity> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(AppUserEntity::getUserId, user.getUserId())
-                    .set(AppUserEntity::getAvatar, url);
-        appUserService.update(updateWrapper);
-        return R.ok().put("url", url);
     }
 
 
