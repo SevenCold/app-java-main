@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 工艺参数状态监控表 采集周期1分钟
@@ -61,6 +61,8 @@ public class AppBusController {
     private AppPopcalOutService appPopcalOutService;
     @Autowired
     private AppRmcModelDataService appRmcModelDataService;
+    @Autowired
+    private AppElectrityDataService appElectricService;
     @Autowired
     private AppMaterialAnalysisService appMaterialAnalysisService;
     @Autowired
@@ -333,6 +335,49 @@ public class AppBusController {
                 .orderByDesc(AppMaterialAnalysisEntity::getTimestamp)
                 .list();
         return R.ok(list);
+    }
+
+    @GetMapping("/dianbiao")
+    @Login
+    @ApiOperation("【分析-电表】表格数据")
+    public R dianbiao(@RequestParam Map<String, Object> params) {
+        List<AppElectrityDataEntity> list = appElectricService.lambdaQuery()
+                .apply(params.containsKey(Constant.START),
+                        SqlUtils.getGtTimeSql("timestamp", params.get(Constant.START), Constant.MINUTE_FORMAT))
+                .apply(params.containsKey(Constant.END),
+                        SqlUtils.getLtTimeSql("timestamp", params.get(Constant.END), Constant.MINUTE_FORMAT))
+                .orderByDesc(AppElectrityDataEntity::getTimestamp)
+                .list();
+        Map<String, List<AppElectrityDataEntity>> timeMap = new HashMap<>();
+        for (AppElectrityDataEntity entity : list) {
+            String key = DateUtil.format(entity.getTimestamp(), DatePattern.NORM_DATE_FORMAT);
+            if (timeMap.containsKey(key)) {
+                timeMap.get(key).add(entity);
+            } else {
+                timeMap.put(key, CollectionUtil.newArrayList(entity));
+            }
+        }
+        List<String> names = list.stream().map(AppElectrityDataEntity::getMeterName).collect(Collectors.toList());
+        HashSet<String> columns = CollectionUtil.newHashSet(true, names);
+        List<Map<String, String>> dataList = new ArrayList<>();
+        timeMap.forEach((key, value) -> {
+            Map<String, String> map = new HashMap<>();
+            map.put("time", key);
+            value.sort(Comparator.comparing(AppElectrityDataEntity::getMeterName));
+            for (String column : columns) {
+                for (AppElectrityDataEntity entity : value) {
+                    if (column.equals(entity.getMeterName())) {
+                        map.put(column + "-consume", entity.getMeterConsume() + "");
+                        map.put(column + "-single", entity.getMeterSingal() + "");
+                    }
+                }
+            }
+            dataList.add(map);
+        });
+        R r = R.ok();
+        r.put("columns", columns);
+        r.put("data", dataList);
+        return r;
     }
 
     @GetMapping("/chengpinFx")

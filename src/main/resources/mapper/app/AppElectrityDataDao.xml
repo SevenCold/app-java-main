@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.v1.dao.AppElectrityDataDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.v1.entity.AppElectrityDataEntity" id="appElectrityDataMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="meterId" column="METER_ID"/>
+        <result property="meterName" column="METER_NAME"/>
+        <result property="meterConsume" column="METER_CONSUME"/>
+        <result property="meterSingal" column="METER_SINGAL"/>
+    </resultMap>
+
+
+</mapper>
