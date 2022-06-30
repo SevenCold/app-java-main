@@ -26,4 +26,7 @@ public class ExcelData {
     private String seventeen;
     private String eighteen;
     private String nineteen;
+    private String twenty;
+    private String twentyOne;
+    private String twentyTwo;
 }

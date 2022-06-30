@@ -19,7 +19,7 @@ import java.util.Map;
 public class TuoliuWriter implements EasyExcelWriter {
 
     @Override
-    public void writeExcel(ExcelWriter excelWriter, WriteSheet writeSheet) {
+    public void writeExcel(ExcelWriter excelWriter, WriteSheet writeSheet, String param) {
         int size = 25;
         FillConfig fillConfig = FillConfig.builder().forceNewRow(Boolean.TRUE).build();
         excelWriter.fill(new FillWrapper("data", getData(size)), fillConfig, writeSheet);

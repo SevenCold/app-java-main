@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.excel.dao.ReportMatConsumeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.excel.entity.ReportMatConsumeEntity" id="reportMatConsumeMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="yield" column="YIELD"/>
+        <result property="conIron" column="CON_IRON"/>
+        <result property="unitIron" column="UNIT_IRON"/>
+        <result property="con320FuelWet" column="CON_320_FUEL_WET"/>
+        <result property="con240FuelWet" column="CON_240_FUEL_WET"/>
+        <result property="conTotalFuelWet" column="CON_TOTAL_FUEL_WET"/>
+        <result property="conTotalFuel" column="CON_TOTAL_FUEL"/>
+        <result property="conOutFuel" column="CON_OUT_FUEL"/>
+        <result property="conPulWet" column="CON_PUL_WET"/>
+        <result property="conPulBill" column="CON_PUL_BILL"/>
+        <result property="conBurntBill" column="CON_BURNT_BILL"/>
+        <result property="conH2o" column="CON_H2O"/>
+        <result property="unitFuelWet" column="UNIT_FUEL_WET"/>
+        <result property="unitBurntWet" column="UNIT_BURNT_WET"/>
+        <result property="conMhWet" column="CON_MH_WET"/>
+        <result property="unitFuelDry" column="UNIT_FUEL_DRY"/>
+        <result property="unitBurntDry" column="UNIT_BURNT_DRY"/>
+        <result property="conPulDry" column="CON_PUL_DRY"/>
+        <result property="limeZf" column="LIME_ZF"/>
+        <result property="limeCpj" column="LIME_CPJ"/>
+        <result property="limeRm" column="LIME_RM"/>
+        <result property="limeBx" column="LIME_BX"/>
+        <result property="limeHg" column="LIME_HG"/>
+        <result property="limeQt1" column="LIME_QT1"/>
+        <result property="limeQt2" column="LIME_QT2"/>
+        <result property="limeQt3" column="LIME_QT3"/>
+        <result property="totalLime" column="TOTAL_LIME"/>
+        <result property="unitLime" column="UNIT_LIME"/>
+        <result property="stoneXp" column="STONE_XP"/>
+        <result property="stoneBx" column="STONE_BX"/>
+        <result property="stoneHg" column="STONE_HG"/>
+        <result property="stoneFy" column="STONE_FY"/>
+        <result property="stoneQt1" column="STONE_QT1"/>
+        <result property="stoneQt2" column="STONE_QT2"/>
+        <result property="stoneQt3" column="STONE_QT3"/>
+        <result property="totalStone" column="TOTAL_STONE"/>
+        <result property="unitStone" column="UNIT_STONE"/>
+        <result property="tlLime" column="TL_LIME"/>
+        <result property="unitTlLime" column="UNIT_TL_LIME"/>
+        <result property="headLime" column="HEAD_LIME"/>
+    </resultMap>
+
+
+</mapper>

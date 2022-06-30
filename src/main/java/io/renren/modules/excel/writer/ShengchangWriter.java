@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class ShengchangWriter implements EasyExcelWriter{
     @Override
-    public void writeExcel(ExcelWriter excelWriter, WriteSheet writeSheet) {
+    public void writeExcel(ExcelWriter excelWriter, WriteSheet writeSheet, String param) {
         int size = 15;
         FillConfig fillConfig = FillConfig.builder().forceNewRow(Boolean.TRUE).build();
         excelWriter.fill(new FillWrapper("data1", getData1(size)), fillConfig, writeSheet);

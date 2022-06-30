@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.excel.dao.ReportEnergyConsumeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.excel.entity.ReportEnergyConsumeEntity" id="reportEnergyConsumeMap">
+        <result property="timestamp" column="TIMESTAMP"/>
+        <result property="yield" column="YIELD"/>
+        <result property="conEleSinter" column="CON_ELE_SINTER"/>
+        <result property="conEleTltx" column="CON_ELE_TLTX"/>
+        <result property="eleCoe" column="ELE_COE"/>
+        <result property="conEleTx" column="CON_ELE_TX"/>
+        <result property="unitEleTx" column="UNIT_ELE_TX"/>
+        <result property="eleTotal" column="ELE_TOTAL"/>
+        <result property="unitEleSinter" column="UNIT_ELE_SINTER"/>
+        <result property="unitEleTltx" column="UNIT_ELE_TLTX"/>
+        <result property="unitEleTotal" column="UNIT_ELE_TOTAL"/>
+        <result property="conWindSinter" column="CON_WIND_SINTER"/>
+        <result property="conWindTltx" column="CON_WIND_TLTX"/>
+        <result property="windCoe" column="WIND_COE"/>
+        <result property="conWindTx" column="CON_WIND_TX"/>
+        <result property="unitWindTx" column="UNIT_WIND_TX"/>
+        <result property="windTotal" column="WIND_TOTAL"/>
+        <result property="unitWindSinter" column="UNIT_WIND_SINTER"/>
+        <result property="unitWindTltx" column="UNIT_WIND_TLTX"/>
+        <result property="unitWindTotal" column="UNIT_WIND_TOTAL"/>
+        <result property="conCokeSinter" column="CON_COKE_SINTER"/>
+        <result property="conCokeTl" column="CON_COKE_TL"/>
+        <result property="conCokeTotal" column="CON_COKE_TOTAL"/>
+        <result property="unitCokeSinter" column="UNIT_COKE_SINTER"/>
+        <result property="unitCokeTl" column="UNIT_COKE_TL"/>
+        <result property="unitCokeTotal" column="UNIT_COKE_TOTAL"/>
+        <result property="conBlastTl" column="CON_BLAST_TL"/>
+        <result property="unitBlastTl" column="UNIT_BLAST_TL"/>
+        <result property="conNh2oSinter" column="CON_NH2O_SINTER"/>
+        <result property="conNh2oTl" column="CON_NH2O_TL"/>
+        <result property="conNh2oTotal" column="CON_NH2O_TOTAL"/>
+        <result property="unitNh2oSinter" column="UNIT_NH2O_SINTER"/>
+        <result property="unitNh2oTl" column="UNIT_NH2O_TL"/>
+        <result property="unitNh2oTotal" column="UNIT_NH2O_TOTAL"/>
+        <result property="conSewageSinter" column="CON_SEWAGE_SINTER"/>
+        <result property="unitSewageSinter" column="UNIT_SEWAGE_SINTER"/>
+        <result property="conSteamSinter" column="CON_STEAM_SINTER"/>
+        <result property="conSteamTl" column="CON_STEAM_TL"/>
+        <result property="conSteamTotal" column="CON_STEAM_TOTAL"/>
+        <result property="unitSteamSinter" column="UNIT_STEAM_SINTER"/>
+        <result property="unitSteamTl" column="UNIT_STEAM_TL"/>
+        <result property="unitSteamTotal" column="UNIT_STEAM_TOTAL"/>
+        <result property="conResteamOut" column="CON_RESTEAM_OUT"/>
+        <result property="conResteamHigh" column="CON_RESTEAM_HIGH"/>
+        <result property="conResteamTotal" column="CON_RESTEAM_TOTAL"/>
+        <result property="conResteamRe" column="CON_RESTEAM_RE"/>
+        <result property="conNitrogen" column="CON_NITROGEN"/>
+        <result property="unitNitrogen" column="UNIT_NITROGEN"/>
+    </resultMap>
+
+
+</mapper>
